@@ -15,15 +15,18 @@ namespace практическая_2.Models
     
     public partial class EstateAgancyEntities : DbContext
     {
-        private static EstateAgancyEntities context;
+
+        private static EstateAgancyEntities _context;
+
         public static EstateAgancyEntities GetContext()
         {
-            if (context == null)
+            if (_context == null)
             {
-                context = new EstateAgancyEntities();
+                _context = new EstateAgancyEntities();
             }
-            return context;
+            return _context;
         }
+        
         public EstateAgancyEntities()
             : base("name=EstateAgancyEntities")
         {

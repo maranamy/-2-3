@@ -21,17 +21,17 @@ namespace практическая_2
     /// </summary>
     public partial class MainWindow : Window
     {
+
+        private Page _currentPage;
+        public Page CurrentPage
+        {
+            get { return _currentPage; }
+            set { _currentPage = value; }
+        }
         public MainWindow()
         {
             InitializeComponent();
             FrmMain.Navigate(new Autho()); // подгрузка страницы в данный фрейм
-        }
-
-        public void Switching(Window win)
-        {
-            win.Show();
-
-            this.Close();
         }
 
 

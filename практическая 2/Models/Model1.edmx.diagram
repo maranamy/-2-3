@@ -4,12 +4,12 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="cb4bdf51d4564444a6e7d2e11fb7ca41" Name="Diagram1">
+      <Diagram DiagramId="cb4bdf51d4564444a6e7d2e11fb7ca41" Name="Diagram1" ZoomLevel="83">
         <EntityTypeShape EntityType="EstateAgancyModel.Agents" Width="1.5" PointX="3" PointY="10.875" IsExpanded="true" />
         <EntityTypeShape EntityType="EstateAgancyModel.Applications" Width="1.5" PointX="8.25" PointY="10.5" IsExpanded="true" />
         <EntityTypeShape EntityType="EstateAgancyModel.aStatus" Width="1.5" PointX="6" PointY="2" IsExpanded="true" />
         <EntityTypeShape EntityType="EstateAgancyModel.aType" Width="1.5" PointX="6" PointY="15.375" IsExpanded="true" />
-        <EntityTypeShape EntityType="EstateAgancyModel.Authoriz" Width="1.5" PointX="0.75" PointY="20.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="EstateAgancyModel.Authoriz" Width="1.5" PointX="3.625" PointY="14.125" IsExpanded="true" />
         <EntityTypeShape EntityType="EstateAgancyModel.Clients" Width="1.5" PointX="6" PointY="10.625" IsExpanded="true" />
         <EntityTypeShape EntityType="EstateAgancyModel.Contracts" Width="1.5" PointX="13.5" PointY="10.625" IsExpanded="true" />
         <EntityTypeShape EntityType="EstateAgancyModel.cStatus" Width="1.5" PointX="11.25" PointY="15.125" IsExpanded="true" />
