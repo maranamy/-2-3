@@ -4,13 +4,12 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="cb4bdf51d4564444a6e7d2e11fb7ca41" Name="Diagram1" ZoomLevel="83">
-        <EntityTypeShape EntityType="EstateAgancyModel.Agents" Width="1.5" PointX="3" PointY="10.875" IsExpanded="true" />
-        <EntityTypeShape EntityType="EstateAgancyModel.Applications" Width="1.5" PointX="8.25" PointY="10.5" IsExpanded="true" />
+      <Diagram DiagramId="cb4bdf51d4564444a6e7d2e11fb7ca41" Name="Diagram1" ZoomLevel="71">
+        <EntityTypeShape EntityType="EstateAgancyModel.Applications" Width="1.5" PointX="9.375" PointY="10" IsExpanded="true" />
         <EntityTypeShape EntityType="EstateAgancyModel.aStatus" Width="1.5" PointX="6" PointY="2" IsExpanded="true" />
         <EntityTypeShape EntityType="EstateAgancyModel.aType" Width="1.5" PointX="6" PointY="15.375" IsExpanded="true" />
         <EntityTypeShape EntityType="EstateAgancyModel.Authoriz" Width="1.5" PointX="3.625" PointY="14.125" IsExpanded="true" />
-        <EntityTypeShape EntityType="EstateAgancyModel.Clients" Width="1.5" PointX="6" PointY="10.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="EstateAgancyModel.Clients" Width="1.5" PointX="7.625" PointY="10.25" IsExpanded="true" />
         <EntityTypeShape EntityType="EstateAgancyModel.Contracts" Width="1.5" PointX="13.5" PointY="10.625" IsExpanded="true" />
         <EntityTypeShape EntityType="EstateAgancyModel.cStatus" Width="1.5" PointX="11.25" PointY="15.125" IsExpanded="true" />
         <EntityTypeShape EntityType="EstateAgancyModel.cType" Width="1.5" PointX="11.25" PointY="17.5" IsExpanded="true" />
@@ -24,7 +23,7 @@
         <EntityTypeShape EntityType="EstateAgancyModel.eStatus" Width="1.5" PointX="6" PointY="5.125" IsExpanded="true" />
         <EntityTypeShape EntityType="EstateAgancyModel.eType" Width="1.5" PointX="6" PointY="7.5" IsExpanded="true" />
         <EntityTypeShape EntityType="EstateAgancyModel.Parameter" Width="1.5" PointX="6" PointY="17.625" IsExpanded="true" />
-        <EntityTypeShape EntityType="EstateAgancyModel.PersonalData" Width="1.5" PointX="0.75" PointY="10.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="EstateAgancyModel.PersonalData" Width="1.5" PointX="0.5" PointY="10.375" IsExpanded="true" />
         <EntityTypeShape EntityType="EstateAgancyModel.PlaceOfStudy" Width="1.5" PointX="0.75" PointY="7.125" IsExpanded="true" />
         <EntityTypeShape EntityType="EstateAgancyModel.PriorityLevel" Width="1.5" PointX="6" PointY="21.75" IsExpanded="true" />
         <EntityTypeShape EntityType="EstateAgancyModel.Speciality" Width="1.5" PointX="0.75" PointY="14.875" IsExpanded="true" />
@@ -32,8 +31,6 @@
         <EntityTypeShape EntityType="EstateAgancyModel.sysdiagrams" Width="1.5" PointX="2.75" PointY="0.75" IsExpanded="true" />
         <EntityTypeShape EntityType="EstateAgancyModel.TechnicalConclusion" Width="1.5" PointX="10.5" PointY="6" IsExpanded="true" />
         <EntityTypeShape EntityType="EstateAgancyModel.TechnicalCondition" Width="1.5" PointX="8.25" PointY="2.375" IsExpanded="true" />
-        <AssociationConnector Association="EstateAgancyModel.FK_Agents_Authoriz" ManuallyRouted="false" />
-        <AssociationConnector Association="EstateAgancyModel.FK_Agents_PersonalData" ManuallyRouted="false" />
         <AssociationConnector Association="EstateAgancyModel.FK__Applicati__Clien__0D7A0286" ManuallyRouted="false" />
         <AssociationConnector Association="EstateAgancyModel.FK__Applicati__Param__0C85DE4D" ManuallyRouted="false" />
         <AssociationConnector Association="EstateAgancyModel.FK__Applicati__Prior__0E6E26BF" ManuallyRouted="false" />
@@ -59,6 +56,11 @@
         <AssociationConnector Association="EstateAgancyModel.FK__EstateObj__TypeI__5DCAEF64" ManuallyRouted="false" />
         <AssociationConnector Association="EstateAgancyModel.FK_TechnicalConclusion_EstateObject" ManuallyRouted="false" />
         <AssociationConnector Association="EstateAgancyModel.FK__Technical__Techn__6477ECF3" ManuallyRouted="false" />
+        <EntityTypeShape EntityType="EstateAgancyModel.Roles" Width="1.5" PointX="5.625" PointY="10.125" />
+        <EntityTypeShape EntityType="EstateAgancyModel.Workers" Width="1.5" PointX="3.375" PointY="11" />
+        <AssociationConnector Association="EstateAgancyModel.FK_Agents_Authoriz1" />
+        <AssociationConnector Association="EstateAgancyModel.FK_Agents_PersonalData1" />
+        <AssociationConnector Association="EstateAgancyModel.FK__Workers__RoleID__756D6ECB" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

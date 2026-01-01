@@ -4,18 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="Хранилище EstateAgancyModel" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
-        <EntityType Name="Agents">
-          <Key>
-            <PropertyRef Name="ID" />
-          </Key>
-          <Property Name="ID" Type="int" Nullable="false" />
-          <Property Name="Surname" Type="varchar" MaxLength="100" Nullable="false" />
-          <Property Name="aName" Type="varchar" MaxLength="100" Nullable="false" />
-          <Property Name="Patronymic" Type="varchar" MaxLength="100" />
-          <Property Name="AuthoID" Type="int" Nullable="false" />
-          <Property Name="PersonalDataID" Type="int" Nullable="false" />
-        </EntityType>
+    <Schema Namespace="Хранилище EstateAgancyModel" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="Applications">
           <Key>
             <PropertyRef Name="ID" />
@@ -49,6 +38,7 @@
           <Property Name="ID" Type="int" Nullable="false" />
           <Property Name="UserLogin" Type="varchar" MaxLength="40" Nullable="false" />
           <Property Name="hashPassword" Type="varchar" MaxLength="64" Nullable="false" />
+          <Property Name="addedAt" Type="datetime2" Precision="3" />
         </EntityType>
         <EntityType Name="Clients">
           <Key>
@@ -217,6 +207,13 @@
           <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="prLevel" Type="varchar" MaxLength="50" Nullable="false" />
         </EntityType>
+        <EntityType Name="Roles">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="RoleName" Type="varchar" MaxLength="50" Nullable="false" />
+        </EntityType>
         <EntityType Name="Speciality">
           <Key>
             <PropertyRef Name="ID" />
@@ -258,6 +255,18 @@
           </Key>
           <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="TypeTC" Type="varchar" MaxLength="100" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Workers">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" Nullable="false" />
+          <Property Name="Surname" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="aName" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="Patronymic" Type="varchar" MaxLength="100" />
+          <Property Name="AuthoID" Type="int" Nullable="false" />
+          <Property Name="PersonalDataID" Type="int" Nullable="false" />
+          <Property Name="RoleID" Type="int" Nullable="false" />
         </EntityType>
         <Association Name="FK__Applicati__Clien__0D7A0286">
           <End Role="Clients" Type="Self.Clients" Multiplicity="1" />
@@ -511,26 +520,38 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK__Workers__RoleID__756D6ECB">
+          <End Role="Roles" Type="Self.Roles" Multiplicity="1" />
+          <End Role="Workers" Type="Self.Workers" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Roles">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Workers">
+              <PropertyRef Name="RoleID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_Agents_Authoriz">
           <End Role="Authoriz" Type="Self.Authoriz" Multiplicity="1" />
-          <End Role="Agents" Type="Self.Agents" Multiplicity="*" />
+          <End Role="Workers" Type="Self.Workers" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Authoriz">
               <PropertyRef Name="ID" />
             </Principal>
-            <Dependent Role="Agents">
+            <Dependent Role="Workers">
               <PropertyRef Name="AuthoID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_Agents_PersonalData">
           <End Role="PersonalData" Type="Self.PersonalData" Multiplicity="1" />
-          <End Role="Agents" Type="Self.Agents" Multiplicity="*" />
+          <End Role="Workers" Type="Self.Workers" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="PersonalData">
               <PropertyRef Name="ID" />
             </Principal>
-            <Dependent Role="Agents">
+            <Dependent Role="Workers">
               <PropertyRef Name="PersonalDataID" />
             </Dependent>
           </ReferentialConstraint>
@@ -584,7 +605,6 @@
           </ReferentialConstraint>
         </Association>
         <EntityContainer Name="Хранилище EstateAgancyModelContainer">
-          <EntitySet Name="Agents" EntityType="Self.Agents" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Applications" EntityType="Self.Applications" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="aStatus" EntityType="Self.aStatus" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="aType" EntityType="Self.aType" Schema="dbo" store:Type="Tables" />
@@ -606,11 +626,13 @@
           <EntitySet Name="PersonalData" EntityType="Self.PersonalData" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="PlaceOfStudy" EntityType="Self.PlaceOfStudy" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="PriorityLevel" EntityType="Self.PriorityLevel" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Roles" EntityType="Self.Roles" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Speciality" EntityType="Self.Speciality" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="StudyForm" EntityType="Self.StudyForm" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="TechnicalConclusion" EntityType="Self.TechnicalConclusion" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="TechnicalCondition" EntityType="Self.TechnicalCondition" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Workers" EntityType="Self.Workers" Schema="dbo" store:Type="Tables" />
           <AssociationSet Name="FK__Applicati__Clien__0D7A0286" Association="Self.FK__Applicati__Clien__0D7A0286">
             <End Role="Clients" EntitySet="Clients" />
             <End Role="Applications" EntitySet="Applications" />
@@ -695,13 +717,17 @@
             <End Role="TechnicalCondition" EntitySet="TechnicalCondition" />
             <End Role="TechnicalConclusion" EntitySet="TechnicalConclusion" />
           </AssociationSet>
+          <AssociationSet Name="FK__Workers__RoleID__756D6ECB" Association="Self.FK__Workers__RoleID__756D6ECB">
+            <End Role="Roles" EntitySet="Roles" />
+            <End Role="Workers" EntitySet="Workers" />
+          </AssociationSet>
           <AssociationSet Name="FK_Agents_Authoriz" Association="Self.FK_Agents_Authoriz">
             <End Role="Authoriz" EntitySet="Authoriz" />
-            <End Role="Agents" EntitySet="Agents" />
+            <End Role="Workers" EntitySet="Workers" />
           </AssociationSet>
           <AssociationSet Name="FK_Agents_PersonalData" Association="Self.FK_Agents_PersonalData">
             <End Role="PersonalData" EntitySet="PersonalData" />
-            <End Role="Agents" EntitySet="Agents" />
+            <End Role="Workers" EntitySet="Workers" />
           </AssociationSet>
           <AssociationSet Name="FK_Clients_Authoriz" Association="Self.FK_Clients_Authoriz">
             <End Role="Authoriz" EntitySet="Authoriz" />
@@ -720,24 +746,10 @@
             <End Role="TechnicalConclusion" EntitySet="TechnicalConclusion" />
           </AssociationSet>
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="EstateAgancyModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
-        <EntityType Name="Agents">
-          <Key>
-            <PropertyRef Name="ID" />
-          </Key>
-          <Property Name="ID" Type="Int32" Nullable="false" />
-          <Property Name="Surname" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="aName" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="Patronymic" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
-          <Property Name="AuthoID" Type="Int32" Nullable="false" />
-          <Property Name="PersonalDataID" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="Authoriz" Relationship="Self.FK_Agents_Authoriz" FromRole="Agents" ToRole="Authoriz" />
-          <NavigationProperty Name="PersonalData" Relationship="Self.FK_Agents_PersonalData" FromRole="Agents" ToRole="PersonalData" />
-        </EntityType>
         <EntityType Name="Applications">
           <Key>
             <PropertyRef Name="ID" />
@@ -778,8 +790,9 @@
           <Property Name="ID" Type="Int32" Nullable="false" />
           <Property Name="UserLogin" Type="String" MaxLength="40" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="hashPassword" Type="String" MaxLength="64" FixedLength="false" Unicode="false" Nullable="false" />
-          <NavigationProperty Name="Agents" Relationship="Self.FK_Agents_Authoriz" FromRole="Authoriz" ToRole="Agents" />
           <NavigationProperty Name="Clients" Relationship="Self.FK_Clients_Authoriz" FromRole="Authoriz" ToRole="Clients" />
+          <NavigationProperty Name="Workers" Relationship="EstateAgancyModel.FK_Agents_Authoriz1" FromRole="Authoriz" ToRole="Workers" />
+          <Property Name="addedAt" Type="DateTime" Precision="3" />
         </EntityType>
         <EntityType Name="Clients">
           <Key>
@@ -964,9 +977,9 @@
           <Property Name="pAddress" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
           <Property Name="Phone" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
           <Property Name="Email" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
-          <NavigationProperty Name="Agents" Relationship="Self.FK_Agents_PersonalData" FromRole="PersonalData" ToRole="Agents" />
           <NavigationProperty Name="Clients" Relationship="Self.FK_Clients_PersonalData" FromRole="PersonalData" ToRole="Clients" />
           <NavigationProperty Name="Diploma" Relationship="Self.FK__Diploma__PersonI__52593CB8" FromRole="PersonalData" ToRole="Diploma" />
+          <NavigationProperty Name="Workers" Relationship="EstateAgancyModel.FK_Agents_PersonalData1" FromRole="PersonalData" ToRole="Workers" />
         </EntityType>
         <EntityType Name="PlaceOfStudy">
           <Key>
@@ -1033,30 +1046,6 @@
           <Property Name="TypeTC" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
           <NavigationProperty Name="TechnicalConclusion" Relationship="Self.FK__Technical__Techn__6477ECF3" FromRole="TechnicalCondition" ToRole="TechnicalConclusion" />
         </EntityType>
-        <Association Name="FK_Agents_Authoriz">
-          <End Role="Authoriz" Type="Self.Authoriz" Multiplicity="1" />
-          <End Role="Agents" Type="Self.Agents" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Authoriz">
-              <PropertyRef Name="ID" />
-            </Principal>
-            <Dependent Role="Agents">
-              <PropertyRef Name="AuthoID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_Agents_PersonalData">
-          <End Role="PersonalData" Type="Self.PersonalData" Multiplicity="1" />
-          <End Role="Agents" Type="Self.Agents" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="PersonalData">
-              <PropertyRef Name="ID" />
-            </Principal>
-            <Dependent Role="Agents">
-              <PropertyRef Name="PersonalDataID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK__Applicati__Clien__0D7A0286">
           <End Role="Clients" Type="Self.Clients" Multiplicity="1" />
           <End Role="Applications" Type="Self.Applications" Multiplicity="*" />
@@ -1358,7 +1347,6 @@
           </ReferentialConstraint>
         </Association>
         <EntityContainer Name="EstateAgancyEntities" annotation:LazyLoadingEnabled="true">
-          <EntitySet Name="Agents" EntityType="Self.Agents" />
           <EntitySet Name="Applications" EntityType="Self.Applications" />
           <EntitySet Name="aStatus" EntityType="Self.aStatus" />
           <EntitySet Name="aType" EntityType="Self.aType" />
@@ -1385,14 +1373,6 @@
           <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" />
           <EntitySet Name="TechnicalConclusion" EntityType="Self.TechnicalConclusion" />
           <EntitySet Name="TechnicalCondition" EntityType="Self.TechnicalCondition" />
-          <AssociationSet Name="FK_Agents_Authoriz" Association="Self.FK_Agents_Authoriz">
-            <End Role="Authoriz" EntitySet="Authoriz" />
-            <End Role="Agents" EntitySet="Agents" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Agents_PersonalData" Association="Self.FK_Agents_PersonalData">
-            <End Role="PersonalData" EntitySet="PersonalData" />
-            <End Role="Agents" EntitySet="Agents" />
-          </AssociationSet>
           <AssociationSet Name="FK__Applicati__Clien__0D7A0286" Association="Self.FK__Applicati__Clien__0D7A0286">
             <End Role="Clients" EntitySet="Clients" />
             <End Role="Applications" EntitySet="Applications" />
@@ -1493,25 +1473,86 @@
             <End Role="TechnicalCondition" EntitySet="TechnicalCondition" />
             <End Role="TechnicalConclusion" EntitySet="TechnicalConclusion" />
           </AssociationSet>
+          <EntitySet Name="Roles" EntityType="EstateAgancyModel.Roles" />
+          <EntitySet Name="Workers" EntityType="EstateAgancyModel.Workers" />
+          <AssociationSet Name="FK_Agents_Authoriz1" Association="EstateAgancyModel.FK_Agents_Authoriz1">
+            <End Role="Authoriz" EntitySet="Authoriz" />
+            <End Role="Workers" EntitySet="Workers" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Agents_PersonalData1" Association="EstateAgancyModel.FK_Agents_PersonalData1">
+            <End Role="PersonalData" EntitySet="PersonalData" />
+            <End Role="Workers" EntitySet="Workers" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Workers__RoleID__756D6ECB" Association="EstateAgancyModel.FK__Workers__RoleID__756D6ECB">
+            <End Role="Roles" EntitySet="Roles" />
+            <End Role="Workers" EntitySet="Workers" />
+          </AssociationSet>
         </EntityContainer>
+        <EntityType Name="Roles">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="RoleName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Workers" Relationship="EstateAgancyModel.FK__Workers__RoleID__756D6ECB" FromRole="Roles" ToRole="Workers" />
+        </EntityType>
+        <EntityType Name="Workers">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" />
+          <Property Name="Surname" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="aName" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="Patronymic" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="AuthoID" Type="Int32" Nullable="false" />
+          <Property Name="PersonalDataID" Type="Int32" Nullable="false" />
+          <Property Name="RoleID" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Authoriz" Relationship="EstateAgancyModel.FK_Agents_Authoriz1" FromRole="Workers" ToRole="Authoriz" />
+          <NavigationProperty Name="PersonalData" Relationship="EstateAgancyModel.FK_Agents_PersonalData1" FromRole="Workers" ToRole="PersonalData" />
+          <NavigationProperty Name="Roles" Relationship="EstateAgancyModel.FK__Workers__RoleID__756D6ECB" FromRole="Workers" ToRole="Roles" />
+        </EntityType>
+        <Association Name="FK_Agents_Authoriz1">
+          <End Type="EstateAgancyModel.Authoriz" Role="Authoriz" Multiplicity="1" />
+          <End Type="EstateAgancyModel.Workers" Role="Workers" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Authoriz">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Workers">
+              <PropertyRef Name="AuthoID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Agents_PersonalData1">
+          <End Type="EstateAgancyModel.PersonalData" Role="PersonalData" Multiplicity="1" />
+          <End Type="EstateAgancyModel.Workers" Role="Workers" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PersonalData">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Workers">
+              <PropertyRef Name="PersonalDataID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Workers__RoleID__756D6ECB">
+          <End Type="EstateAgancyModel.Roles" Role="Roles" Multiplicity="1" />
+          <End Type="EstateAgancyModel.Workers" Role="Workers" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Roles">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Workers">
+              <PropertyRef Name="RoleID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
         <EntityContainerMapping StorageEntityContainer="Хранилище EstateAgancyModelContainer" CdmEntityContainer="EstateAgancyEntities">
-          <EntitySetMapping Name="Agents">
-            <EntityTypeMapping TypeName="EstateAgancyModel.Agents">
-              <MappingFragment StoreEntitySet="Agents">
-                <ScalarProperty Name="ID" ColumnName="ID" />
-                <ScalarProperty Name="Surname" ColumnName="Surname" />
-                <ScalarProperty Name="aName" ColumnName="aName" />
-                <ScalarProperty Name="Patronymic" ColumnName="Patronymic" />
-                <ScalarProperty Name="AuthoID" ColumnName="AuthoID" />
-                <ScalarProperty Name="PersonalDataID" ColumnName="PersonalDataID" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="Applications">
             <EntityTypeMapping TypeName="EstateAgancyModel.Applications">
               <MappingFragment StoreEntitySet="Applications">
@@ -1544,6 +1585,7 @@
           <EntitySetMapping Name="Authoriz">
             <EntityTypeMapping TypeName="EstateAgancyModel.Authoriz">
               <MappingFragment StoreEntitySet="Authoriz">
+                <ScalarProperty Name="addedAt" ColumnName="addedAt" />
                 <ScalarProperty Name="ID" ColumnName="ID" />
                 <ScalarProperty Name="UserLogin" ColumnName="UserLogin" />
                 <ScalarProperty Name="hashPassword" ColumnName="hashPassword" />
@@ -1778,6 +1820,27 @@
               <MappingFragment StoreEntitySet="TechnicalCondition">
                 <ScalarProperty Name="ID" ColumnName="ID" />
                 <ScalarProperty Name="TypeTC" ColumnName="TypeTC" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Roles">
+            <EntityTypeMapping TypeName="EstateAgancyModel.Roles">
+              <MappingFragment StoreEntitySet="Roles">
+                <ScalarProperty Name="RoleName" ColumnName="RoleName" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Workers">
+            <EntityTypeMapping TypeName="EstateAgancyModel.Workers">
+              <MappingFragment StoreEntitySet="Workers">
+                <ScalarProperty Name="RoleID" ColumnName="RoleID" />
+                <ScalarProperty Name="PersonalDataID" ColumnName="PersonalDataID" />
+                <ScalarProperty Name="AuthoID" ColumnName="AuthoID" />
+                <ScalarProperty Name="Patronymic" ColumnName="Patronymic" />
+                <ScalarProperty Name="aName" ColumnName="aName" />
+                <ScalarProperty Name="Surname" ColumnName="Surname" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

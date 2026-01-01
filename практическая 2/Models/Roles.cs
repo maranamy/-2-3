@@ -12,20 +12,16 @@ namespace практическая_2.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class Authoriz
+    public partial class Roles
     {
-        public Authoriz()
+        public Roles()
         {
-            this.Clients = new HashSet<Clients>();
             this.Workers = new HashSet<Workers>();
         }
     
-        public int ID { get; set; }
-        public string UserLogin { get; set; }
-        public string hashPassword { get; set; }
-        public Nullable<System.DateTime> addedAt { get; set; }
+        public int Id { get; set; }
+        public string RoleName { get; set; }
     
-        public virtual ICollection<Clients> Clients { get; set; }
         public virtual ICollection<Workers> Workers { get; set; }
     }
 }

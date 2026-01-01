@@ -16,9 +16,9 @@ namespace практическая_2.Models
     {
         public PersonalData()
         {
-            this.Agents = new HashSet<Agents>();
             this.Clients = new HashSet<Clients>();
             this.Diploma = new HashSet<Diploma>();
+            this.Workers = new HashSet<Workers>();
         }
     
         public int ID { get; set; }
@@ -27,8 +27,8 @@ namespace практическая_2.Models
         public string Phone { get; set; }
         public string Email { get; set; }
     
-        public virtual ICollection<Agents> Agents { get; set; }
         public virtual ICollection<Clients> Clients { get; set; }
         public virtual ICollection<Diploma> Diploma { get; set; }
+        public virtual ICollection<Workers> Workers { get; set; }
     }
 }

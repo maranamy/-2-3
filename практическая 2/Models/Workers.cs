@@ -12,7 +12,7 @@ namespace практическая_2.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class Agents
+    public partial class Workers
     {
         public int ID { get; set; }
         public string Surname { get; set; }
@@ -20,8 +20,10 @@ namespace практическая_2.Models
         public string Patronymic { get; set; }
         public int AuthoID { get; set; }
         public int PersonalDataID { get; set; }
+        public int RoleID { get; set; }
     
         public virtual Authoriz Authoriz { get; set; }
         public virtual PersonalData PersonalData { get; set; }
+        public virtual Roles Roles { get; set; }
     }
 }

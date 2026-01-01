@@ -157,9 +157,19 @@ namespace практическая_2.Pages
 
         public string RoleIs(Authoriz user)
         {
-            int who = (user.UserLogin.StartsWith("agent_", StringComparison.OrdinalIgnoreCase) ? 1 : 2);
-            string role = (who == 1 ? "агент" : "клиент");
-            return role;
+            var worker = (EstateAgancyEntities.GetContext()).Workers.Where(x => x.AuthoID == user.ID).FirstOrDefault();
+            /*int who = (user.UserLogin.StartsWith("agent_", StringComparison.OrdinalIgnoreCase) ? 1 : 2);
+            string role = (who == 1 ? "агент" : "клиент");*/
+            string role = null;
+            if ((worker == null ? 1 : 2) == 1)
+            {
+                role = "клиент";
+            }
+            else
+            {
+                role = (EstateAgancyEntities.GetContext()).Roles.Where(x => x.Id == worker.RoleID).FirstOrDefault().RoleName;
+            }
+                return role;
         }
 
         private void LoadPage(string role, Authoriz user)
@@ -169,15 +179,23 @@ namespace практическая_2.Pages
             {
                 case "клиент":
                     NavigationService.Navigate(new ClientPage(user));
-                    MessageBox.Show("Вы вошли как:" + role);
+                    //MessageBox.Show("Вы вошли как:" + role);
                     break;
-                case "агент":
+                case "риелтор":
                     if (CheckWorkTime.CheckWork())
                     {
                         NavigationService.Navigate(new AgentPage(user, role));
-                        MessageBox.Show("Вы вошли как:" + role);
+                        //MessageBox.Show("Вы вошли как:" + role);
                     }
                     else MessageBox.Show("Вы не можете войти в систему в нерабочее время!", "Exception", MessageBoxButton.OK, MessageBoxImage.Stop);
+                    break;
+                case "Администратор":
+                    //if (CheckWorkTime.CheckWork())
+                    //{
+                        NavigationService.Navigate(new AdminPage(user, role));
+                        //MessageBox.Show("Вы вошли как:" + role);
+                    //}
+                    //else MessageBox.Show("Вы не можете войти в систему в нерабочее время!", "Exception", MessageBoxButton.OK, MessageBoxImage.Stop);
                     break;
             }
         }

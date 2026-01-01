@@ -5,11 +5,11 @@
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:практическая_2.Pages"
       mc:Ignorable="d" 
-      d:DesignHeight="480" d:DesignWidth="800"
+      d:DesignHeight="450" d:DesignWidth="800"
       Title="Autho">
     <Page.Background>
         <RadialGradientBrush>
-            <GradientStop Color="#FFBBB2FF" Offset="1"/>
+            <GradientStop Color="GhostWhite" Offset="0.5"/>
             <GradientStop Color="White" Offset="0"/>
         </RadialGradientBrush>
     </Page.Background>
@@ -34,8 +34,8 @@
             <TextBox Visibility="Hidden" x:Name="tbxCaptcha"/>
             <TextBlock HorizontalAlignment="Center" Visibility="Hidden" x:Name="txblockTimer"/>
             <StackPanel Orientation="Horizontal" Height="80" HorizontalAlignment="Center">
-                <Button x:Name="btnEnterAsGuest" Margin="5,15,5,5" Content="Войти как гость" Click="btn_EnterAsGuest"/>
-                <Button x:Name="btnEnter" Margin="5,15,5,5" Content="Войти" Click="btn_Enter"/>
+                <Button x:Name="btnEnterAsGuest" Margin="5,15,5,5" Style="{StaticResource DefaultButton}" Content="Войти как гость" Click="btn_EnterAsGuest"/>
+                <Button x:Name="btnEnter" Margin="5,15,5,5" Style="{StaticResource DefaultButton}" Content="Войти" Click="btn_Enter"/>
             </StackPanel>
         </StackPanel>
     </Grid>

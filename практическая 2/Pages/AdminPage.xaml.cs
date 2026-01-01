@@ -14,15 +14,16 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using практическая_2.Models;
 using практическая_2.Services;
+using практическая_2.Pages;
 
 namespace практическая_2.Pages
 {
     /// <summary>
-    /// Логика взаимодействия для AgentPage.xaml
+    /// Логика взаимодействия для AdminPage.xaml
     /// </summary>
-    public partial class AgentPage : Page
+    public partial class AdminPage : Page
     {
-        public AgentPage(Authoriz user, string role)
+        public AdminPage(Authoriz user, string role)
         {
             InitializeComponent();
             Greeting(user);
@@ -35,13 +36,18 @@ namespace практическая_2.Pages
 
             if (user != null)
             {
-                AgentGreeting.Text = CheckWorkTime.CheckDayTime() + NameSurname(user);
+                AdminGreeting.Text = CheckWorkTime.CheckDayTime() + NameSurname(user);
             }
         }
 
         public string NameSurname(Workers user)
         {
             return user.aName + " " + user.Patronymic;
+        }
+
+        private void WorkWithUsers_ClickBtn(object sender, RoutedEventArgs e)
+        {
+            NavigationService.Navigate(new WorkersListPage());
         }
     }
 }

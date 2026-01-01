@@ -16,17 +16,18 @@ namespace практическая_2.Models
     public partial class EstateAgancyEntities : DbContext
     {
 
-        private static EstateAgancyEntities _context;
+        private static EstateAgancyEntities context;
 
         public static EstateAgancyEntities GetContext()
         {
-            if (_context == null)
+            if (context == null)
             {
-                _context = new EstateAgancyEntities();
+                context = new EstateAgancyEntities();
             }
-            return _context;
+            return context;
         }
-        
+
+
         public EstateAgancyEntities()
             : base("name=EstateAgancyEntities")
         {
@@ -37,7 +38,6 @@ namespace практическая_2.Models
             throw new UnintentionalCodeFirstException();
         }
     
-        public DbSet<Agents> Agents { get; set; }
         public DbSet<Applications> Applications { get; set; }
         public DbSet<aStatus> aStatus { get; set; }
         public DbSet<aType> aType { get; set; }
@@ -64,5 +64,7 @@ namespace практическая_2.Models
         public DbSet<sysdiagrams> sysdiagrams { get; set; }
         public DbSet<TechnicalConclusion> TechnicalConclusion { get; set; }
         public DbSet<TechnicalCondition> TechnicalCondition { get; set; }
+        public DbSet<Roles> Roles { get; set; }
+        public DbSet<Workers> Workers { get; set; }
     }
 }
