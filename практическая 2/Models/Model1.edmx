@@ -190,6 +190,7 @@
           <Property Name="pAddress" Type="varchar" MaxLength="500" />
           <Property Name="Phone" Type="varchar" MaxLength="20" />
           <Property Name="Email" Type="varchar" MaxLength="100" />
+          <Property Name="Photo" Type="varchar" MaxLength="500" />
         </EntityType>
         <EntityType Name="PlaceOfStudy">
           <Key>
@@ -980,6 +981,7 @@
           <NavigationProperty Name="Clients" Relationship="Self.FK_Clients_PersonalData" FromRole="PersonalData" ToRole="Clients" />
           <NavigationProperty Name="Diploma" Relationship="Self.FK__Diploma__PersonI__52593CB8" FromRole="PersonalData" ToRole="Diploma" />
           <NavigationProperty Name="Workers" Relationship="EstateAgancyModel.FK_Agents_PersonalData1" FromRole="PersonalData" ToRole="Workers" />
+          <Property Name="Photo" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
         </EntityType>
         <EntityType Name="PlaceOfStudy">
           <Key>
@@ -1750,6 +1752,7 @@
           <EntitySetMapping Name="PersonalData">
             <EntityTypeMapping TypeName="EstateAgancyModel.PersonalData">
               <MappingFragment StoreEntitySet="PersonalData">
+                <ScalarProperty Name="Photo" ColumnName="Photo" />
                 <ScalarProperty Name="ID" ColumnName="ID" />
                 <ScalarProperty Name="BirthDate" ColumnName="BirthDate" />
                 <ScalarProperty Name="pAddress" ColumnName="pAddress" />

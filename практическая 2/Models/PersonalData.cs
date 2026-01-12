@@ -26,6 +26,7 @@ namespace практическая_2.Models
         public string pAddress { get; set; }
         public string Phone { get; set; }
         public string Email { get; set; }
+        public string Photo { get; set; }
     
         public virtual ICollection<Clients> Clients { get; set; }
         public virtual ICollection<Diploma> Diploma { get; set; }

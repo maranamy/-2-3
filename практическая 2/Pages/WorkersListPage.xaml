@@ -18,8 +18,40 @@
                     Width="250"
                             Height="250"
                     Padding="10" 
-                    Margin="20">
-                
+                    Margin="20"
+                    Cursor="Hand">
+
+                <Border.ContextMenu>
+                    <ContextMenu>
+                        <MenuItem Header="Открыть профиль" Click="OpenProfile_MenuItemClick"/>
+                        <MenuItem Header="Редактировать профиль" Click="EditProfile_MenuItemClick"/>
+                        <MenuItem Header="Удалить сотрудника" Click="DeleteProfile_MenuItemClick"/>
+                    </ContextMenu>
+                    <!--ContextMenu x:Name="EmployeeContextMenu"
+                                 Placement="MousePoint"          
+                        PlacementTarget="{Binding PlacementTarget, RelativeSource={RelativeSource Self}}">
+
+                        <MenuItem Header="Открыть профиль"
+                                  Command="{Binding DataContext.OpenProfileCommand,
+                                                    RelativeSource={RelativeSource AncestorType=ItemsControl}}"
+                                  CommandParameter="{Binding PlacementTarget.DataContext,
+                                                             RelativeSource={RelativeSource AncestorType=ContextMenu}}"/>
+
+                        <MenuItem Header="Редактировать"
+                                  Command="{Binding DataContext.EditEmployeeCommand,
+                                                    RelativeSource={RelativeSource AncestorType=ItemsControl}}"
+                                  CommandParameter="{Binding PlacementTarget.DataContext,
+                                                             RelativeSource={RelativeSource AncestorType=ContextMenu}}"/>
+
+                        <MenuItem Header="Удалить"
+                                  Command="{Binding DataContext.DeleteEmployeeCommand,
+                                                    RelativeSource={RelativeSource AncestorType=ItemsControl}}"
+                                  CommandParameter="{Binding PlacementTarget.DataContext,
+                                                             RelativeSource={RelativeSource AncestorType=ContextMenu}}"/>
+                    </ContextMenu-->
+                </Border.ContextMenu>
+
+
                 <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center" Width="210">
                     <!-- Фото-аглушка -->
                     <Border Background="#FFACA0D4" Width="150" Height="150" CornerRadius="75">
@@ -46,7 +78,9 @@
 
         </DataTemplate>
     </Page.Resources>
-    <Grid Cursor="Hand">
+    
+    
+    <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition/>
             <ColumnDefinition/>
@@ -64,21 +98,21 @@
                Grid.ColumnSpan="4"  
             Fill="#FF130234" Height="100"
                 VerticalAlignment="Top"/>
-        <StackPanel Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="4" Orientation="Horizontal" Margin="50,30" VerticalAlignment="Top">
+        <StackPanel Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="4" Orientation="Horizontal" Margin="30" VerticalAlignment="Top">
             <TextBlock Text="Поиск по ФИО" VerticalAlignment="Center" Style="{StaticResource DefaultTextBlock}" Foreground="GhostWhite"/>
             <TextBox x:Name="txtSearch" 
-         VerticalAlignment="Center"  Width="150" SelectionChanged="txtSearch_SelectionChanged"/>
-            <TextBlock Text="Сортировка" Foreground="GhostWhite" Margin="50,0,0,0" Style="{StaticResource DefaultTextBlock}" VerticalAlignment="Center"/>
+         VerticalAlignment="Center"  Width="150" SelectionChanged="txtSearch_SelectionChanged" Height="28" FontFamily="Book Antiqua"/>
+            <TextBlock Text="Сортировка" Foreground="GhostWhite" Margin="40,0,0,0" Style="{StaticResource DefaultTextBlock}" VerticalAlignment="Center"/>
             <ComboBox x:Name="cmbFilter" 
           SelectedIndex="0" 
-           VerticalAlignment="Center" Width="150" SelectionChanged="cmbFilter_SelectedChanged" IsReadOnly="True">
-            </ComboBox>
+           VerticalAlignment="Center" Width="150" SelectionChanged="cmbFilter_SelectedChanged" IsReadOnly="True" Height="28"/>
+            <Button x:Name="AddingBtn" Style="{StaticResource DefaultButton}" Height="28" Margin="40,0,0,0" Content="Добавить сотрудника" Width="150" Click="AddingBtn_Click"/>
         </StackPanel>
         
      
 
         <ScrollViewer Grid.Row="0" Grid.Column="0" Grid.RowSpan="3" Grid.ColumnSpan="4" Margin="30,100,0,0">
-            <ItemsControl Name="EmployeesItemsControl" ItemTemplate="{StaticResource EmployeeCardTemplate}" HorizontalAlignment="Stretch">
+            <ItemsControl Name="EmployeesItemsControl" ItemsSource="{Binding Workers}" ItemTemplate="{StaticResource EmployeeCardTemplate}"  HorizontalAlignment="Stretch">
                 <ItemsControl.ItemsPanel>
                     <ItemsPanelTemplate>
                         <WrapPanel/>

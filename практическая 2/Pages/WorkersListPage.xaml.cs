@@ -15,6 +15,7 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using практическая_2.Models;
 using практическая_2.Services;
+using практическая_2.ViewModels;
 
 namespace практическая_2.Pages
 {
@@ -57,7 +58,7 @@ namespace практическая_2.Pages
             EstateAgancyEntities db = EstateAgancyEntities.GetContext();
 
             var workersFromDb = db.Workers
-                .Include("Roles").Include("Authoriz")  
+                .Include("Roles").Include("Authoriz").Include("PersonalData")  
                 //.OrderBy(w => w.Surname)
                 .ToList();
 
@@ -67,18 +68,35 @@ namespace практическая_2.Pages
                 string fullName = $"{worker.Surname ?? ""} {worker.aName ?? ""} {worker.Patronymic ?? ""}".Trim();
                 if (string.IsNullOrWhiteSpace(fullName))
                     fullName = "Не указано";
-
-                
+                                
                 string position = worker.Roles?.RoleName ?? "Должность не указана";
                 
+                DateTime birthDate = worker.PersonalData?.BirthDate ?? DateTime.MinValue;
+
+                string address = worker.PersonalData.pAddress;
+
+                string phoneNum = worker.PersonalData.Phone;
+
+                string email = worker.PersonalData.Email;
+
                 DateTime addedAt = worker.Authoriz?.addedAt ?? DateTime.Now;
+
+                string login = worker.Authoriz.UserLogin;
+
+                string hashPassw = worker.Authoriz.hashPassword;
 
                 allEmployees.Add(new WorkerClass
                 {
                     Id = worker.ID,
                     FullName = fullName,
                     Position = position,
-                    AddedAt = addedAt
+                    BirthDate = birthDate,
+                    Address = address,
+                    PhoneNumber = phoneNum,
+                    Email = email,
+                    AddedAt = addedAt,
+                    Login = login,
+                    Password = hashPassw
                 });
             }
 
@@ -123,6 +141,39 @@ namespace практическая_2.Pages
         private void cmbFilter_SelectedChanged(object sender, SelectionChangedEventArgs e)
         {
             FilteringMode();
+        }
+
+        private void OpenProfile_MenuItemClick(object sender, RoutedEventArgs e)
+        {
+            if(sender is MenuItem menuItem)
+            {
+                if(menuItem.DataContext is WorkerClass worker)
+                {
+                    NavigationService.Navigate(new WorkerAddingPage(3, worker));
+                }
+            }
+            
+        }
+
+        private void EditProfile_MenuItemClick(object sender, RoutedEventArgs e)
+        {
+            if (sender is MenuItem menuItem)
+            {
+                if (menuItem.DataContext is WorkerClass worker)
+                {
+                    NavigationService.Navigate(new WorkerAddingPage(2, worker));
+                }
+            }
+        }
+
+        private void DeleteProfile_MenuItemClick(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void AddingBtn_Click(object sender, RoutedEventArgs e)
+        {
+            NavigationService.Navigate(new WorkerAddingPage(1, null));
         }
     }
 }

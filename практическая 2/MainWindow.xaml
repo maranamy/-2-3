@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:практическая_2"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800" MinHeight="432" MinWidth="800" Icon="/gory_8x862dz213yp.ico">
+        Title="MainWindow" Height="470" Width="800" MinHeight="470" MinWidth="800" Icon="/gory_8x862dz213yp.ico">
     <Grid>
         <Grid.Background>
             <SolidColorBrush Color="White"/>

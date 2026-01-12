@@ -27,7 +27,6 @@ namespace практическая_2.Models
             return context;
         }
 
-
         public EstateAgancyEntities()
             : base("name=EstateAgancyEntities")
         {
