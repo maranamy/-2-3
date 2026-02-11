@@ -16,6 +16,7 @@ using System.Windows.Shapes;
 using System.Windows.Threading;
 using практическая_2.Models;
 using практическая_2.Services;
+using практическая_2.Pages.Admin;
 
 namespace практическая_2.Pages
 {

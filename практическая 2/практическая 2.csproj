@@ -84,6 +84,21 @@
     <Reference Include="WindowsBase" />
     <Reference Include="PresentationCore" />
     <Reference Include="PresentationFramework" />
+    <Reference Include="Xceed.Wpf.AvalonDock, Version=5.0.0.0, Culture=neutral, PublicKeyToken=3e4669d2f30244f4, processorArchitecture=MSIL">
+      <HintPath>..\packages\Extended.Wpf.Toolkit.5.0.0\lib\net40\Xceed.Wpf.AvalonDock.dll</HintPath>
+    </Reference>
+    <Reference Include="Xceed.Wpf.AvalonDock.Themes.Aero, Version=5.0.0.0, Culture=neutral, PublicKeyToken=3e4669d2f30244f4, processorArchitecture=MSIL">
+      <HintPath>..\packages\Extended.Wpf.Toolkit.5.0.0\lib\net40\Xceed.Wpf.AvalonDock.Themes.Aero.dll</HintPath>
+    </Reference>
+    <Reference Include="Xceed.Wpf.AvalonDock.Themes.Metro, Version=5.0.0.0, Culture=neutral, PublicKeyToken=3e4669d2f30244f4, processorArchitecture=MSIL">
+      <HintPath>..\packages\Extended.Wpf.Toolkit.5.0.0\lib\net40\Xceed.Wpf.AvalonDock.Themes.Metro.dll</HintPath>
+    </Reference>
+    <Reference Include="Xceed.Wpf.AvalonDock.Themes.VS2010, Version=5.0.0.0, Culture=neutral, PublicKeyToken=3e4669d2f30244f4, processorArchitecture=MSIL">
+      <HintPath>..\packages\Extended.Wpf.Toolkit.5.0.0\lib\net40\Xceed.Wpf.AvalonDock.Themes.VS2010.dll</HintPath>
+    </Reference>
+    <Reference Include="Xceed.Wpf.Toolkit, Version=5.0.0.0, Culture=neutral, PublicKeyToken=3e4669d2f30244f4, processorArchitecture=MSIL">
+      <HintPath>..\packages\Extended.Wpf.Toolkit.5.0.0\lib\net40\Xceed.Wpf.Toolkit.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <ApplicationDefinition Include="App.xaml">
@@ -189,22 +204,25 @@
     <Compile Include="Models\Workers.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
-    <Compile Include="Pages\AdminPage.xaml.cs">
+    <Compile Include="Pages\Admin\AdminPage.xaml.cs">
       <DependentUpon>AdminPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="Pages\AgentPage.xaml.cs">
       <DependentUpon>AgentPage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Pages\WorkerAddingPage.xaml.cs">
+    <Compile Include="Pages\Admin\WorkerAddingPage.xaml.cs">
       <DependentUpon>WorkerAddingPage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Pages\WorkersListPage.xaml.cs">
+    <Compile Include="Pages\Admin\WorkersListPage.xaml.cs">
       <DependentUpon>WorkersListPage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Services\ValidationAttributes\AddressAttribute.cs" />
+    <Compile Include="Services\ValidationAttributes\BirthDateRangeAttribute.cs" />
     <Compile Include="Services\CaptchaGen.cs" />
     <Compile Include="Services\CheckWorkTime.cs" />
     <Compile Include="Services\Hash.cs" />
     <Compile Include="Services\ModeClass.cs" />
+    <Compile Include="Services\ValidationAttributes\RequiredIfFilledAttribute.cs" />
     <Compile Include="Services\WorkerClass.cs" />
     <Compile Include="ViewModels\WorkersListModel.cs" />
     <Page Include="MainWindow.xaml">
@@ -219,7 +237,7 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Page Include="Pages\AdminPage.xaml">
+    <Page Include="Pages\Admin\AdminPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -235,11 +253,11 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Pages\WorkerAddingPage.xaml">
+    <Page Include="Pages\Admin\WorkerAddingPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Pages\WorkersListPage.xaml">
+    <Page Include="Pages\Admin\WorkersListPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -296,8 +314,14 @@
   <ItemGroup>
     <Resource Include="gory_8x862dz213yp.ico" />
   </ItemGroup>
-  <ItemGroup />
   <ItemGroup>
+    <Folder Include="Pages\Client\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\background.png" />
+    <Resource Include="Resources\header.png" />
+    <Resource Include="background.png" />
+    <Resource Include="header.png" />
     <Content Include="Models\Model1.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>Model1.Context.cs</LastGenOutput>

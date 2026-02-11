@@ -5,14 +5,8 @@
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:практическая_2.Pages"
       mc:Ignorable="d" 
-      d:DesignHeight="450" d:DesignWidth="800"
+      d:DesignHeight="450" MaxWidth="800" MaxHeight="450"  d:DesignWidth="800"
       Title="Autho">
-    <Page.Background>
-        <RadialGradientBrush>
-            <GradientStop Color="GhostWhite" Offset="0.5"/>
-            <GradientStop Color="White" Offset="0"/>
-        </RadialGradientBrush>
-    </Page.Background>
 
     <Grid>
         <Grid.ColumnDefinitions>
@@ -22,13 +16,13 @@
         </Grid.ColumnDefinitions>
 
         <StackPanel Grid.Row="1" Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Center">
-            <TextBlock Text="Логин:"/>
+            <TextBlock Text="Логин:" Style="{StaticResource DefaultTextBlock}"/>
             <TextBox x:Name="tbxLogin"/>
-            <TextBlock Text="Пароль:"/>
+            <TextBlock Text="Пароль:" Style="{StaticResource DefaultTextBlock}"/>
             <TextBox x:Name="tbxPassword"/>
             <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Height="30" Width="223">
-                 <TextBlock Visibility="Hidden" x:Name="tblockCapthca" Text="Капча: "/>
-                 <TextBlock Visibility="Hidden" x:Name="tblOutCapcha" Text=""/>
+                 <TextBlock Visibility="Hidden" x:Name="tblockCapthca" Text="Капча: " Style="{StaticResource DefaultTextBlock}"/>
+                <TextBlock Visibility="Hidden" x:Name="tblOutCapcha"  Style="{StaticResource DefaultTextBlock}"/>
             </StackPanel>
            
             <TextBox Visibility="Hidden" x:Name="tbxCaptcha"/>
